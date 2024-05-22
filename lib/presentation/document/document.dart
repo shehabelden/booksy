@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'document_screen.dart';
 import 'widget/document_header.dart';
 import 'widget/document_list_continer.dart';
-
 class DocumentList extends StatelessWidget {
   const DocumentList({super.key,required this.category});
   final String ? category;
@@ -17,7 +16,7 @@ class DocumentList extends StatelessWidget {
     double height=MediaQuery.of(context).size.height;
     return BlocBuilder<MainDocCubit,MainDocState>(
       builder: (context,state) {
-        return state is EmptyState ? const Center(child: CircularProgressIndicator(),) :  Scaffold(
+        return state is EmptyState || cubit.docList.isEmpty ? const Center(child: CircularProgressIndicator(),) :  Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
             leading: const Center(

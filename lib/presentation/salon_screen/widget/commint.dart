@@ -7,7 +7,7 @@ class Commint extends StatelessWidget {
   final Map ? map;
   @override
   Widget build(BuildContext context) {
-    Timestamp date= map!["date"];
+    Timestamp  date=map!["date"];
     return Padding(
       padding: const EdgeInsets.only(left: 20.0,top: 10,bottom: 20,right: 20.0),
       child: Column(
@@ -33,7 +33,8 @@ class Commint extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("${map!["name"]}"),
-                    Text("${date.toDate().day.toString()}/${date.toDate().month.toString()}/${date.toDate().year.toString()}",style:const TextStyle(
+                    Text(map!.isEmpty ? "" :" ${date.toDate().day.toString()}/${date.toDate().month.toString()}/${date.toDate().year.toString()}",style:const TextStyle(
+
                     )),
                   ],
                 ),
@@ -43,7 +44,7 @@ class Commint extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: RatingBar.builder(
-              initialRating: 3,
+              initialRating: 0,
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
@@ -60,17 +61,15 @@ class Commint extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 30),
-          Text("service: ${map!["service"]}",style:const TextStyle(
-              fontSize: 16
-          )),
+          // Text("service: ${map!["service"]}",style:const TextStyle(
+          //     fontSize: 16
+          // )),
           const SizedBox(height: 20),
           Text("${map!["commint"]}",style:const TextStyle(
             fontSize: 12,
           )),
-
         ],
       ),
     );
-
   }
 }

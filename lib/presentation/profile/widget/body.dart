@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ProfileBody extends StatelessWidget {
-  const ProfileBody({super.key});
+import '../cubit/cubit.dart';
+import '../cubit/state.dart';
 
+class ProfileBody extends StatelessWidget {
+  const ProfileBody({super.key,required this.cubit});
+  final ProfileCubit cubit;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(top: 100,left: 20,right: 20),
+    return cubit.myShopSer.isEmpty ? const Center(child: CircularProgressIndicator(),) : Container(
+      padding:const EdgeInsets.only(top: 100,left: 20,right: 20),
       child: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, // number of columns
           crossAxisSpacing: 10, // spacing between columns
           mainAxisSpacing: 10, // spacing between rows
         ),
-        itemCount: 10, // number of items in the grid
+        itemCount: cubit.myShopSer.length, // number of items in the grid
         itemBuilder: (BuildContext context, int index) {
           return Container(
             decoration: BoxDecoration(
@@ -28,7 +31,7 @@ class ProfileBody extends StatelessWidget {
                   ),
                 ],
                 image: DecorationImage(
-                    image: AssetImage("images/profile_test.jpeg"),
+                    image: NetworkImage(cubit.myShopSer[index]["image"]),
                     fit: BoxFit.cover
                 )
             ),

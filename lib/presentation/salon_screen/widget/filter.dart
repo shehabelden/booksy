@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../cubit/cubit.dart';
 class FilterScreen extends StatelessWidget {
-  FilterScreen({super.key,required this.id});
+  const FilterScreen({super.key,required this.id});
    final String ? id ;
-  final List list =["Services","reviews","portfolio","details"];
-  final List list1 =["Services","commintes","protfolio","info",];
-
   @override
   Widget build(BuildContext context) {
+    final List list =[AppLocalizations.of(context)!.services,
+      AppLocalizations.of(context)!.reviews,
+      AppLocalizations.of(context)!.portfolio,
+      AppLocalizations.of(context)!.about_us,
+    ];
+    final List list1 =["Services","commintes","protfolio","info",];
     SalonCubit cubit= SalonCubit.get(context);
     return SizedBox(
       height: 40,

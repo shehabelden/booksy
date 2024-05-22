@@ -24,7 +24,8 @@ class DocumentScreen extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold),
             )),
             title:  Padding(
-                padding: EdgeInsets.only(left: width*.6944444444444444), child: Icon(Icons.search)),
+                padding: EdgeInsets.only(left: width*.6944444444444444),
+                child: Icon(Icons.search)),
           ),
           backgroundColor: Colors.grey.shade100,
           body: Padding(

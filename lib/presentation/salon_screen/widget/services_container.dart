@@ -51,7 +51,7 @@ class ServicesContainer extends StatelessWidget {
                   onTap: (){
                     Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) =>  BookScreen(idShop: idShop,idService: idService,),
+                          builder: (context) =>  BookScreen(shopName:map!["name"],map: map,idShop:idShop!),
                         ));
                   },
                   child: Container(

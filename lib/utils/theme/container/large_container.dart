@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../presentation/home/cubit/cubit.dart';
+
 class LargeContainer extends StatelessWidget {
-  const LargeContainer({super.key,required this.map});
+  const LargeContainer({super.key,required this.map,required this.id});
   final Map <String,dynamic> ? map ;
+  final String ? id ;
   @override
   Widget build(BuildContext context) {
+    MainCubit cubit=MainCubit.get(context);
+    if(cubit.rateList.isEmpty){
+    cubit.getRateCubit(id);
+    }
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
     return SizedBox(
@@ -31,16 +38,15 @@ class LargeContainer extends StatelessWidget {
                   height: height*.075,
                   width: width*.2222222222222222,
                   alignment: Alignment.center,
-                  child: Text(map!["rate"].toString(),style: TextStyle(
-                      color: Colors.white
-                  ),),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.circular(12),
                   ),
+                  child: Text((map!["rate"]).toString(),style:const TextStyle(
+                      color: Colors.white
+                  ),),
                 ),
               ),
-
             ],
           ),
           Text(

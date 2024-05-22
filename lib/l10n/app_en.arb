@@ -33,5 +33,26 @@
   "find_best_vaccinate_treatment": "Find best vaccinate, treatment...",
   "booking": "booking",
   "book": "book",
-  "choose_the_language": "Choose the language"
+  "services":"Services" ,
+  "portfolio":"portfolio",
+  "details":"details" ,
+  "tuesday": "Tuesday",
+  "monday": "monday",
+  "wednesday": "Wednesday",
+  "thursday": "thursday",
+  "friday": "friday",
+  "saturday": "saturday",
+  "sunday": "sunday",
+  "submit": "submit",
+  "pleas_add_commitment": "pleas add commitment",
+  "choose_the_language": "Choose the language",
+  "booking_list": "booking list",
+  "services_manages": "services manage",
+  "accepted": "accepted",
+  "rejected": "rejected",
+  "add_about_as": "add about As",
+  "update_about_as": "update about As",
+  "add_phone": "add phone",
+  "update_phone": "update phone"
+
 }

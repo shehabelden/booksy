@@ -33,6 +33,27 @@
   "find_best_vaccinate_treatment": "Löydä paras rokote, hoito...",
   "booking": "varaus",
   "book": "kirja",
-  "choose_the_language": "Valitse kieli"
+  "services": "palvelut",
+  "portfolio": "portfolio",
+  "details": "yksityiskohdat",
+  "tuesday": "tiistai",
+  "monday": "maanantai",
+  "wednesday": "keskiviikko",
+  "thursday": "torstai",
+  "friday": "perjantai",
+  "saturday": "lauantai",
+  "sunday": "sunnuntai",
+  "submit": "Lähetä",
+  "pleas_add_commitment": "pyydä lisää sitoutumista",
+  "choose_the_language": "Valitse kieli",
+  "booking_list": "varauslista",
+  "services_manages": "palvelut hoitavat",
+  "accepted": "hyväksytty",
+  "rejected": "hylätty",
+  "add_about_as":"lisää meistä",
+  "update_about_as": "päivitys meistä",
+  "add_phone": "lisää puhelin",
+  "update_phone": "päivitä puhelin"
+
 }
 

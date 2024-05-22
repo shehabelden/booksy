@@ -33,6 +33,26 @@
   "find_best_vaccinate_treatment": "تعرف على أفضل لقاح وعلاج...",
   "booking": "الحجز",
   "book": "كتاب",
-  "choose_the_language": "اختار اللغه"
+  "services": "خدمات",
+  "portfolio": "المعرض",
+  "details":"تفاصيل" ,
+  "tuesday": "الثلاثاء",
+  "monday": "الاثنين",
+  "wednesday": "الاربعء",
+  "thursday": "الخميس",
+  "friday": "الجمعه ",
+  "saturday": "السبت",
+  "sunday": "الاحد",
+  "submit": "اضف",
+  "pleas_add_commitment":"من فضلك اضف تعليق " ,
+  "choose_the_language": "اختار اللغه",
+  "booking_list": "قائمة الحجوذات",
+  "services_manages": "ادارات الخدمات",
+  "accepted": "قبول",
+  "rejected": "مرفوض",
+  "add_about_as": "اضف نبذه",
+  "update_about_as": "تعديل النبذه",
+  "add_phone": "اضافة الهاتف",
+  "update_phone": "تعديل الهاتف"
 
 }

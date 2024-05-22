@@ -7,18 +7,21 @@ import 'widget/booking.dart';
 import 'widget/booking_card.dart';
 import 'widget/booking_hour.dart';
 class BookScreen extends StatelessWidget {
-  const BookScreen({super.key,required this.idService,required this.idShop});
+  const BookScreen({super.key,required this.map,required this.idShop,required this.shopName});
+  final Map ? map;
   final String ? idShop;
-  final String ? idService;
+  final String ? shopName;
+
   @override
   Widget build(BuildContext context) {
     SalonCubit cubit=SalonCubit.get(context);
-    cubit.bookingCubit(idShop!, idService!);
+    cubit.getProfile();
     double height=MediaQuery.of(context).size.height;
+    cubit.hoursList(map);
     return Scaffold(
       body: BlocBuilder<SalonCubit,SalonManeState>(
     builder: (context,state) {
-      return state is EmptyStatusState || cubit.bookList.isEmpty ? const Center(child: CircularProgressIndicator(),) : Padding(
+      return  Padding(
             padding:  EdgeInsets.only(top: height*.125),
             child: SingleChildScrollView(
               child: Column(
@@ -49,15 +52,15 @@ class BookScreen extends StatelessWidget {
                       height: 10,
                     ),
                   ),
-                   BookingHour(list: cubit.bookList[0]["time"]),
+                   BookingHour(map: map!),
                   SizedBox(
                     child: Divider(
                       color: Colors.grey.shade300,
                       height: 10,
                     ),
                   ),
-                  BookingCard(mapCard: cubit.bookList[0]),
-                   Booking(map:cubit.bookList[0]),
+                  BookingCard(mapCard: map!,mapUser: cubit.mapProfile),
+                   Booking(map:map!,idShop:idShop!,shopName:shopName),
                 ],
               ),
             ),

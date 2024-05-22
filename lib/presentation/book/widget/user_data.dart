@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UserData extends StatelessWidget {
-  const UserData({super.key});
-
+  const UserData({super.key,required this.map});
+  final Map ? map;
   @override
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
@@ -14,13 +14,17 @@ class UserData extends StatelessWidget {
           Container(
             height: height/20,
             width: height/20,
-            decoration:const BoxDecoration(
+            decoration:map!["image"]==null? const BoxDecoration(
+                color:Colors.grey,
+                shape: BoxShape.circle,
+            ): BoxDecoration(
               color:Colors.grey,
               shape: BoxShape.circle,
+              image: DecorationImage(image: NetworkImage(map!["image"]))
             ),
           ),
           const SizedBox(width: 10,),
-          const Text("shehab"),
+           Text(map!["name"] == null? "shop" :map!["name"]),
         ],
       ),
     );

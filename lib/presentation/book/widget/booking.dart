@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../salon_screen/cubit/cubit.dart';
 class Booking extends StatelessWidget {
-  const Booking({super.key,required this.map});
+  const Booking({super.key,required this.map,required this.idShop,required this.shopName});
   final Map ? map;
+  final String ? idShop;
+  final String ? shopName;
   @override
   Widget build(BuildContext context) {
     SalonCubit cubit=SalonCubit.get(context);
@@ -21,7 +24,7 @@ class Booking extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               )),
             ),
-            Text("${map!["tim"].toString()}m",style: TextStyle(
+            Text("${map!["tim"].toString()}m",style:const TextStyle(
               color: Colors.grey,
               fontSize: 15,
             )),
@@ -32,12 +35,14 @@ class Booking extends StatelessWidget {
           onTap: (){
             cubit.addBookingCubit({
               "date":cubit.date,
-              "shop_name":"shop",
-              "name":"shehab",
-              "status":"pendding",
+              "shop_name":shopName!,
+              "name":cubit.mapProfile["name"],
+              "status":"pending",
               "price": map!["price"],
               "serv":map!["name"],
               "hours":cubit.time,
+              "customer_id":FirebaseAuth.instance.currentUser!.uid,
+              "shop_id":idShop!,
             });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -53,7 +58,7 @@ class Booking extends StatelessWidget {
           },
           child: Container(
           height: 40,
-          width:80 ,
+          width:80,
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),

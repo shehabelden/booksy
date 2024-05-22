@@ -6,14 +6,14 @@ import 'cubit/cubit.dart';
 import 'cubit/state.dart';
 import 'widget/facebook_auth_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'widget/user_type_drop_down_button.dart';
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     AuthCubit cubit = AuthCubit.get(context);
-    GlobalKey<FormState> formState = GlobalKey();
+    GlobalKey<FormState> formState1 = GlobalKey();
     bool obscureText = false;
     return Scaffold(
       body: SingleChildScrollView(
@@ -25,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0,right: 20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +47,7 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                   child: Form(
-                    key: formState,
+                    key: formState1,
                     child: Column(
                       children: [
                         SizedBox(
@@ -109,6 +109,18 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
+                        DropDownSubUserTypeButton(
+                          width: 320,
+                          fun: cubit,
+                          list:const [
+                            "costmer",
+                            "shop",
+                          ],
+                          value: cubit.userType,
+                          dropdownValue: "user type",
+                        ),
+                       const SizedBox(height: 30,),
+
                         SizedBox(
                           height: 60,
                           child: TextFormField(
@@ -180,15 +192,18 @@ class SignUpScreen extends StatelessWidget {
                   height: 40,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 50.0),
+                  padding: const EdgeInsets.only(left: 50.0,right: 50),
                   child: InkWell(
                     onTap: (){
-    if (!formState.currentState!.validate()) {
-    cubit.signUpCubit(Controllers.emailControllerl.text,
-                          Controllers.passController.text,Controllers.nameController.text);
+                      if (!formState1.currentState!.validate()) {
                     }else{
-
-    }},
+                      cubit.signUpCubit(
+                      Controllers.emailControllerl.text,
+                      Controllers.passController.text,
+                      Controllers.nameController.text,
+                        cubit.userType
+                      );
+                      }},
                     child: const LargeButton(
                       color: Color(0xFF43def0),
                       text: "continue",
@@ -228,14 +243,14 @@ class SignUpScreen extends StatelessWidget {
                   height: 20,
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(left: 50.0),
+                  padding: EdgeInsets.only(left: 50.0,right: 50),
                   child: FaceBookAuthLoginButton(),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                  Padding(
-                  padding:const EdgeInsets.only(left: 100.0),
+                  padding:const EdgeInsets.only(left: 80.0,right: 80),
                   child: Row(
                     children: [
                        Text(

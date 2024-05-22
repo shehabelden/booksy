@@ -8,8 +8,9 @@ import 'screen/rate.dart';
 import 'widget/filter.dart';
 import 'widget/services.dart';
 class SalonScreen extends StatelessWidget {
-  const SalonScreen({super.key,required this.id});
-  final String ? id ;
+  const SalonScreen({super.key,required this.id,required this.mainRate});
+  final String ? id;
+  final double ? mainRate;
   @override
   Widget build(BuildContext context) {
     SalonCubit cubit=SalonCubit.get(context);
@@ -19,7 +20,11 @@ class SalonScreen extends StatelessWidget {
     }
     return BlocBuilder<SalonCubit,SalonManeState>(
       builder: (context,state) {
-        List list=  [ServicesScreen(list:cubit.shopList,id:id,idList: cubit.idServicesList),Rate(list:cubit.shopList,id:id), Portfolio(),Details(list:cubit.shopList,about:cubit.shopMap["about_as"],)];
+        List list=  [ServicesScreen(list:cubit.shopList,id:id, idList: cubit.idServicesList),
+          Rate(list:cubit.shopList,id:id,mainRate:mainRate!),
+          Portfolio(),
+          Details(list:cubit.shopList,about:cubit.shopMap["about_as"],)
+        ];
         return Scaffold(
           body:state is EmptyState || cubit.shopList.isEmpty ?  const Center(child: CircularProgressIndicator(),) : Column(
             children: [
@@ -73,10 +78,10 @@ class SalonScreen extends StatelessWidget {
                                    ),
                                  ),
                                 const SizedBox(height: 20),
-                                  Text(cubit.shopMap["type"],style:const TextStyle(
+                                  Text(cubit.shopMap["type"] ==""?"no type yet": cubit.shopMap["type"],style:const TextStyle(
                                   fontSize: 14
                                 ),),
-                                 Text(cubit.shopMap["address"],style:const TextStyle(
+                                 Text(cubit.shopMap["address"] ==""?"no address yet": cubit.shopMap["address"],style:const TextStyle(
                                     fontSize: 14,
                                     color: Colors.grey
                                 ),),
@@ -93,7 +98,7 @@ class SalonScreen extends StatelessWidget {
               ),),
               Expanded(
                 flex:10,
-                child:state is EmptyStatusState ? const Center(child: CircularProgressIndicator(),) : list[cubit.index],
+                child: list[cubit.index],
               )
             ],
           ),

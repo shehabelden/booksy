@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'user_data.dart';
 
 class MyBookingCard extends StatelessWidget {
-  const MyBookingCard({super.key,required this.mapCard});
+  const MyBookingCard({super.key,required this.mapCard,required this.userMap});
   final Map ? mapCard ;
+  final Map ? userMap ;
   @override
   Widget build(BuildContext context) {
     Timestamp date= mapCard!["date"];
@@ -63,8 +64,7 @@ class MyBookingCard extends StatelessWidget {
           ),
           Row(
             children: [
-
-              const Expanded(flex:3,child: UserData()),
+              Expanded(flex:3,child: UserData(map: userMap!,)),
               Expanded(flex:1,child: SizedBox(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

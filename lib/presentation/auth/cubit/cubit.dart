@@ -6,10 +6,13 @@ import 'state.dart';
 
 class AuthCubit extends Cubit<AuthMainState> {
   AuthCubit() : super(AuthInitState());
-
+  String  userType= "costmer";
   static AuthCubit get(context) => BlocProvider.of(context);
+  userTypeCubit(value){
+    userType=value;
+    emit(UserTypeState());
+  }
   signInCubit(emailAddress, password) async {
-
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: emailAddress, password: password);
@@ -18,8 +21,7 @@ class AuthCubit extends Cubit<AuthMainState> {
     }
     emit(SignInState());
   }
-
-  signUpCubit(emailAddress, password,name) async {
+  signUpCubit(emailAddress, password,name,userType) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress,
@@ -34,15 +36,28 @@ class AuthCubit extends Cubit<AuthMainState> {
     } catch (e) {
       print(e);
     }
-    print("e");
-    createProf(FirebaseAuth.instance.currentUser!.uid,name);
+    if(userType=="costmer"){
+      createProf(FirebaseAuth.instance.currentUser!.uid,name);
+    }else{
+      createShop(FirebaseAuth.instance.currentUser!.uid,name);
+    }
     emit(SignUpState());
   }
   createProf(uid,name)async{
    await FirebaseFirestore.instance.collection("Profile").doc(uid).set(
      {
        "name":name,
+       "type":"costmer"
      }
    );
   }
+  createShop(uid,name)async{
+    await FirebaseFirestore.instance.collection("shope").doc(uid).set(
+        {
+          "name":name,
+        }
+    );
+    FirebaseFirestore.instance.collection("shope").doc(uid).collection("commintes").add({});
+  }
+
 }

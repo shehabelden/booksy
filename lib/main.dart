@@ -1,13 +1,12 @@
-import 'package:booksy/presentation/profile/transleate.dart';
-import 'package:booksy/utils/cash_helper/cash_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
 import 'presentation/auth/cubit/cubit.dart';
-import 'presentation/auth/login_screen.dart';
+import 'presentation/auth/login_check.dart';
 import 'presentation/auth/sign_up.dart';
+import 'presentation/category/cubit/cubit.dart';
 import 'presentation/document/cubit/cubit.dart';
 import 'presentation/home/cubit/cubit.dart';
 import 'presentation/home/cubit/state.dart';
@@ -15,9 +14,7 @@ import 'presentation/main_screen/main_screen.dart';
 import 'presentation/profile/cubit/cubit.dart';
 import 'presentation/salon_screen/cubit/cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'presentation/search/search_screen.dart';
-
+import 'utils/cash_helper/cash_helper.dart';
 //360
 //800
 void main() async{
@@ -25,7 +22,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  CacheHelper.init();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -39,6 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => MainCubit()),
         BlocProvider(create: (context) => MainDocCubit()),
         BlocProvider(create: (context) => ProfileCubit()),
+        BlocProvider(create: (context) => CategoryCubit()),
       ],
       child: BlocBuilder<MainCubit,MainState>(
           builder: (context,state) {
@@ -62,7 +60,7 @@ class MyApp extends StatelessWidget {
           routes: {
             // When navigating to the "/" route, build the FirstScreen widget.
             '/main_Screen': (context) => const MainScreen(),
-            '/login': (context) => const LoginScreen(),
+            '/login': (context) => const LoginCheck(),
             '/Sign_Up': (context) => const SignUpScreen(),
 
             // When navigating to the "/second" route, build the SecondScreen widget.
@@ -71,7 +69,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             useMaterial3: true,
           ),
-          home:const  TransleteScreen(),
+              home:const MainScreen(),
           );
         }
       ),

@@ -18,7 +18,7 @@ class LoginCheck extends StatelessWidget {
            return const Center(child: CircularProgressIndicator(),);
          }
         if(FirebaseAuth.instance.currentUser == null){
-          return const LoginScreen();
+          return  LoginScreen();
         }else{
           return const ProfileScreen();}
       }

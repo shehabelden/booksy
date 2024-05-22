@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'user_data.dart';
 
 class BookingCard extends StatelessWidget {
-  const BookingCard({super.key,required this.mapCard});
+  const BookingCard({super.key,required this.mapCard,required this.mapUser});
   final Map ? mapCard ;
+  final Map ? mapUser ;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,10 +24,12 @@ class BookingCard extends StatelessWidget {
               children: [
                 Expanded(
                   flex:1,
-                  child: Text("${mapCard!["name"]}",style:const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  )),
+                  child: Container(
+                    child: Text("${mapCard!["name"]}",style:const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
                 ),
                 Expanded(
                   flex:1,
@@ -34,14 +37,18 @@ class BookingCard extends StatelessWidget {
                     children: [
                       Padding(
                         padding:const EdgeInsets.only(left: 70.0),
-                        child: Text("${mapCard!["price"]}",style:const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        child: Container(
+                          child: Text("${mapCard!["price"]}",style:const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          )),
+                        ),
+                      ),
+                      Container(
+                        child: const Text("10.30AM-10.35AM",style: TextStyle(
+                            color: Colors.grey
                         )),
                       ),
-                      const Text("10.30AM-10.35AM",style: TextStyle(
-                          color: Colors.grey
-                      )),
 
                     ],
                   ),
@@ -56,7 +63,7 @@ class BookingCard extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-         const  UserData(),
+           UserData(map: mapUser!),
         ],
       ),
     );

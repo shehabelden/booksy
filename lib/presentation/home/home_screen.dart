@@ -1,10 +1,10 @@
-import 'package:booksy/presentation/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/theme/container/document_container.dart';
 import '../../utils/theme/container/large_container.dart';
 import '../document/document.dart';
 import '../salon_screen/salon_screen.dart';
+import '../search/search_screen.dart';
 import 'cubit/cubit.dart';
 import 'cubit/state.dart';
 import 'widget/app_bar_circle.dart';
@@ -17,11 +17,13 @@ class HomeScreen extends StatelessWidget{
     MainCubit cubit=MainCubit.get(context);
     cubit.docList();
     cubit.shopCubit();
+    cubit.shopMainCubit();
+    cubit.rateCont=0;
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
     return BlocBuilder<MainCubit,MainState>(
       builder: (context,state) {
-        return  state is EmptyState  ? const Center(child: CircularProgressIndicator(),) : Scaffold(
+        return  state is EmptyState || cubit.shopList == null  ? const Center(child: CircularProgressIndicator(),) : Scaffold(
           body: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,14 +50,13 @@ class HomeScreen extends StatelessWidget{
                                 MaterialPageRoute(
                                   builder: (context) => const  SearchScreen(),
                                 ));
-
                           },
-                            child:const Search()
+                            child:const Search(),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: height*.025, right: width*.0277777777777778),
-                        child:const AppBarCircles(),
+                        child: AppBarCircles(list: cubit.shopMainList,),
                       ),
                     ],
                   ),
@@ -69,17 +70,19 @@ class HomeScreen extends StatelessWidget{
                         itemCount: cubit.shopList.length,
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, i) {
+                        itemBuilder: (context, index) {
                           return  Padding(
                             padding: EdgeInsets.only(top: height*.0125),
                             child: InkWell(
                               onTap: (){
                                 Navigator.of(context).push(
                                     MaterialPageRoute(
-                                      builder: (context) =>  SalonScreen(id: cubit.idList[i],),
+                                      builder: (context) =>
+                                          SalonScreen(id: cubit.idList[index],
+                                              mainRate:cubit.shopList[index]["rate"]*1.0),
                                     ));
                               },
-                                child: LargeContainer(map:cubit.shopList[i])),
+                                child: LargeContainer(map:cubit.shopList[index],id: cubit.idList[index],)),
                           );
                         }),
                   ),
@@ -119,17 +122,17 @@ class HomeScreen extends StatelessWidget{
                         itemCount: cubit.shopList.length,
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, i) {
+                        itemBuilder: (context, index) {
                           return  Padding(
                             padding: EdgeInsets.only(top: height*.0125),
                             child: InkWell(
                                 onTap: (){
                                   Navigator.of(context).push(
                                       MaterialPageRoute(
-                                        builder: (context) =>  SalonScreen(id: cubit.idList[i],),
+                                        builder: (context) =>  SalonScreen(id: cubit.idList[index],mainRate:cubit.shopList[index]["rate"]*1.0),
                                       ));
                                 },
-                                child: LargeContainer(map:cubit.shopList[i])),
+                                child: LargeContainer(map:cubit.shopList[index],id: cubit.idList[index],)),
                           );
                         }),
                   ),

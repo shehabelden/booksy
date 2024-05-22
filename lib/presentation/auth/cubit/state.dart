@@ -4,6 +4,9 @@ class AuthInitState extends AuthMainState {}
 
 class SignInState extends AuthMainState {}
 
+class UserTypeState extends AuthMainState {}
+
+
 class SignUpState extends AuthMainState {}
 
 class CreateProfileState extends AuthMainState {}

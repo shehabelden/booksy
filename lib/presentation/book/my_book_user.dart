@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../profile/cubit/cubit.dart';
 import '../profile/cubit/state.dart';
-class MyBooking extends StatelessWidget {
-  const MyBooking({super.key});
+class MyBookingUser extends StatelessWidget {
+  const MyBookingUser({super.key});
   @override
   Widget build(BuildContext context) {
     ProfileCubit cubit=ProfileCubit.get(context);
     cubit.getBookingProfile();
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
+    cubit.getProfile();
     return  Scaffold(
       body: BlocBuilder<ProfileCubit,ProfileMainState>(
         builder: (context,state) {
@@ -23,7 +24,7 @@ class MyBooking extends StatelessWidget {
              itemBuilder:(context,index){
               return Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: MyBookingCard(mapCard:cubit.myBookingList[index],),
+                child: MyBookingCard(mapCard:cubit.myBookingList[index],userMap:cubit.mapProfile),
               );
             }),
        );
